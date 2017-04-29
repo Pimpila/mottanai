@@ -4,6 +4,7 @@ import { Icon } from 'react-native-elements';
 
 import Home from '../containers/Home'
 import Results from '../containers/Results'
+import SuperFrugal from '../containers/SuperFrugal'
 
 
 // every component defined as a screen here will have a this.props.navigation property
@@ -25,22 +26,37 @@ export const ResultsStack = StackNavigator({
   }
 })
 
+export const SuperFrugalStack = StackNavigator({
+  SuperFrugal: {
+    screen: SuperFrugal,
+    navigationOptions: {
+      title: 'Super Frugal'
+    }
+  }
+})
+
 // each key in TabNavigator represents a screen
-// you can also define navigation options on the components themselves (via static navitationOptions), but here we're keeping it separate
+// you can also define navigation options on the components themselves (via static navigationOptions), but here we're keeping it separate
 export const Tabs = TabNavigator({
   Home: {
     screen: HomeStack,
     navigationOptions: {
-      tabBarLable: 'Home',
+      tabBarLabel: 'Home',
       tabBarIcon: ({ tintColor }) => <Icon name='home' size={35} color={tintColor}/>
     }
   },
   Results: {
     screen: ResultsStack,
     navigationOptions: {
-      tabBarLable: 'Home',
+      tabBarLabel: 'Recipes',
       tabBarIcon: ({ tintColor }) => <Icon name='list' size={35} color={tintColor}/>
     }
+  },
+  SuperFrugal: {
+    screen: SuperFrugalStack,
+    navigationOptions: {
+      tabBarLabel: 'Super Frugal',
+      tabBarIcon: ({ tintColor }) => <Icon name='star' size={35} color={tintColor}/>
+    }
   }
-
 })

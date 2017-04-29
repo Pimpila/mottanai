@@ -20,19 +20,37 @@ this.props = getRecipes
 
 class Results extends Component {
 
-  onSuperFrugalPress() {
-    console.log('this.props', this.props)
+ onSuperFrugalPress() {
     let newSearchTerm
-    switch (this.props.searchTerms) {
-      case 'Carrots':
-        newSearchTerm = 'Carrot Tops'
-        break
-      default:
-        newSearchTerm = this.props.searchTerms
-    }
+
+    if (this.props.searchTerms.includes('carrot')) newSearchTerm = 'carrot tops'
+    if (this.props.searchTerms.includes('beets')) newSearchTerm = 'beet greens'
+    if (this.props.searchTerms.includes('chicken')) newSearchTerm = 'chicken skin'
+    if (this.props.searchTerms.includes('watermelon')) newSearchTerm = 'watermelon rind'
+    if (this.props.searchTerms.includes('parmesan')) newSearchTerm = 'parmesan rind'
+    if (this.props.searchTerms.includes('radish')) newSearchTerm = 'radish greens'
+    if (this.props.searchTerms.includes('turnip')) newSearchTerm = 'turnip greens'
+    if (this.props.searchTerms.includes('lemon')) newSearchTerm = 'lemon peel'
+    if (this.props.searchTerms.includes('orange')) newSearchTerm = 'orange peel'
     console.log('newSearchTerm', newSearchTerm)
     this.props.getSuperRecipe(newSearchTerm)
+    this.props.navigation.navigate('SuperFrugal')
   }
+
+  // onSuperFrugalPress() {
+  //   console.log('i pressed frugal button')
+  //   let newSearchTerm
+  //   switch (this.props.searchTerms) {
+  //     case 'Carrots':
+  //       newSearchTerm = 'Carrot Tops'
+  //       break
+  //     default:
+  //       newSearchTerm = this.props.searchTerms
+  //   }
+  //   console.log('newSearchTerm', newSearchTerm)
+  //   this.props.getSuperRecipe(newSearchTerm)
+  //   this.props.navigation.navigate('SuperFrugal')
+  // }
 
   render() {
     return (

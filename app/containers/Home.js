@@ -26,7 +26,6 @@ class Home extends Component {
   }
 
   onButtonPress() {
-    console.log('localState', this.state.searchTerms)
     this.props.setSearchTerms(this.state.searchTerms)
     this.props.getRecipes(this.state.searchTerms)
     // first param passed to navigate is the screen you want to navigate to, second optional param is any param you want to pass onto the next screen which would be avail as state.params
@@ -42,6 +41,7 @@ class Home extends Component {
         </View>
         <View style={styles.searchSection}>
           <TextInput style={styles.searchInput}
+            autoCapitalize='none'
             placeholder='Ingredients'
             returnKeyType='search'
             onChangeText={(input) => this.setState({searchTerms: input})}
