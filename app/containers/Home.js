@@ -11,6 +11,7 @@ import {
   TouchableHighlight} from 'react-native'
 
 import ActionCreators from '../actions/index'
+import Header from '../components/Header'
 
 /*
 this.props = getRecipes
@@ -25,19 +26,15 @@ class Home extends Component {
   }
 
   handleSearch() {
-    console.log('props', this.props)
-    console.log('this.state', this.state)
-    console.log('action creators', ActionCreators)
-    console.log('searchTerms', this.state.searchTerms)
     this.props.getRecipes(this.state.searchTerms)
   }
 
   render() {
-    console.log('props', this.props)
-    console.log('props.recipes', this.props.recipes)
-    console.log('props.recipes.length', this.props.recipes.length) // ?? why is this returning 0? see console.log
     return (
       <View style={styles.scene}>
+        <View>
+          <Header />
+        </View>
         <View style={styles.searchSection}>
           <TextInput style={styles.searchInput}
             placeholder='Ingredients'
@@ -54,14 +51,11 @@ class Home extends Component {
           {
             !!this.props.recipes.length && // not hitting this block b/c recipes.length === 0
               this.props.recipes.map((recipe) => {
-                console.log('recipe', recipe)
-                console.log('imageURL', recipe.images[0].hostedLargeUrl)
                 const imageUrl = recipe.images[0].hostedLargeUrl
-                console.log('type', typeof imageUrl)
                 return (
                   <View key={recipe.id}>
                     <Image source={{uri: imageUrl}} style={{height: 150}}/>
-                    <Text>{recipe.recipeName}</Text>
+                    <Text>{recipe.name}</Text>
                   </View>
                 )
               })
@@ -74,7 +68,8 @@ class Home extends Component {
 
 const styles = StyleSheet.create({
   scene: {
-    flex: 1,
+    flex: 1, // flex of 1 is entire screen. if you had two children component also flex 1, they each would be 1/2 of that parent container.
+    flexDirection: 'column',
     marginTop: 20
   },
   searchSection: {
