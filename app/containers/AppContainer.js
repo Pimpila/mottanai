@@ -7,66 +7,19 @@ import {
   View,
   Navigator,
 } from 'react-native'
+// import { StackNavigator } from 'react-navigation'
 
 import ActionCreators from '../actions/index'
-import Home from './Home'
-import Results from './Results'
-import Recipe from './Recipe'
+import { Tabs } from '../config/router'
+// import Home from './Home'
+// import Results from './Results'
 
-/* this.props = {
-  recipes:
-  getRecipes:
-}
-*/
 class AppContainer extends Component {
-
   render() {
-    return (
-      <Navigator
-        initialRoute={{
-          id: 'Home'
-        }}
-        renderScene={
-          this.navigatorRenderScene
-        }
-      />
-    )
-  }
-
-  navigatorRenderScene(route, navigator) {
-    _navigator = navigator
-    switch (route.id) {
-      case 'Home':
-        return(<Home navigator={navigator} title='Home'/>)
-      case 'Results':
-        return(<Results navigator={navigator} title='Results'/>)
-      case 'Recipe':
-        return(<Recipe navigator={navigator} title='Recipe'/>)
-    }
+    return <Tabs />
   }
 }
 
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     backgroundColor: '#F5FCFF',
-//   },
-//   welcome: {
-//     fontSize: 20,
-//     textAlign: 'center',
-//     margin: 10,
-//   },
-//   instructions: {
-//     textAlign: 'center',
-//     color: '#333333',
-//     marginBottom: 5,
-//   },
-// });
+export default AppContainer
 
-const mapState = (state) => {return {}}
 
-const mapDispatch = (dispatch) => {return {}}
-
-export default connect(mapState, null)(AppContainer)

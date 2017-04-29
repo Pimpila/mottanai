@@ -7,9 +7,10 @@ import {
   TextInput,
   Image,
   Button,
-  Linking,
   StyleSheet,
-  TouchableHighlight} from 'react-native'
+  Linking,
+  TouchableHighlight
+} from 'react-native'
 
 import ActionCreators from '../actions/index'
 import Header from '../components/Header'
@@ -18,26 +19,15 @@ import Header from '../components/Header'
 this.props = getRecipes
 */
 
-class Recipe extends Component {
-
+class Results extends Component {
 
   render() {
     return (
-      <View style={styles.scene}>
-        <ScrollView style={styles.scrollSection}>
-          {
-            !!this.props.recipes.length && // not hitting this block b/c recipes.length === 0
-              this.props.recipes.map((recipe) => {
-                const imageUrl = recipe.images[0].hostedLargeUrl
-                return (
-                  <View key={recipe.id}>
-                    <Image source={{uri: imageUrl}} style={{height: 150}} onPress={openRecipe}/>
-                    <Text>{recipe.name}</Text>
-                  </View>
-                )
-              })
-          }
-        </ScrollView>
+      <View key={recipe.id}>
+        <TouchableHighlight onPress={openRecipe}>
+          <Image source={{ uri: imageUrl }} style={{ height: 150 }} />
+        </TouchableHighlight>
+        <Text>{recipe.name}</Text>
       </View>
     )
   }
@@ -78,4 +68,4 @@ const mapDispatch = (dispatch) => ({
   }
 })
 
-export default connect(mapState, mapDispatch)(Recipe)
+export default connect(mapState, mapDispatch)(SuperFrugal)
