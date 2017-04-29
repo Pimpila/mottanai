@@ -20,16 +20,19 @@ this.props = getRecipes
 
 class Results extends Component {
 
-  // onSuperFrugalPress() {
-  //   let newSearchTerm
-  //   switch (this.props.searchTerms) {
-  //     case 'Carrots':
-  //       newSearchTerm = 'Carrot Tops'
-  //     default:
-  //       newSearchTerm = this.props.searchTerms
-  //   }
-  //   this.props.getSuperRecipe(newSearchTerm)
-  // }
+  onSuperFrugalPress() {
+    console.log('this.props', this.props)
+    let newSearchTerm
+    switch (this.props.searchTerms) {
+      case 'Carrots':
+        newSearchTerm = 'Carrot Tops'
+        break
+      default:
+        newSearchTerm = this.props.searchTerms
+    }
+    console.log('newSearchTerm', newSearchTerm)
+    this.props.getSuperRecipe(newSearchTerm)
+  }
 
   render() {
     return (
@@ -53,13 +56,11 @@ class Results extends Component {
                 )
               })
           }
-          {/*
           <Button
             title='Feeling Super Frugal'
             color='#841584'
-            onPress={this.onSuperFrugalPress}
+            onPress={this.onSuperFrugalPress.bind(this)}
           />
-          */}
         </ScrollView>
       </View>
     )
