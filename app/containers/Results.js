@@ -19,19 +19,17 @@ this.props = getRecipes
 */
 
 class Results extends Component {
-  // ?? two types of buttons on results page, images you can click to go to recipes or a button you can click to go to 'super mottanai' (carrot top pesto)
 
-  // need to define this
-  // openRecipe(recipeUrl) {
-  //   console.log('recipeUrl', recipeUrl)
-  //   Linking.openURL(recipeUrl)
+  // onSuperFrugalPress() {
+  //   let newSearchTerm
+  //   switch (this.props.searchTerms) {
+  //     case 'Carrots':
+  //       newSearchTerm = 'Carrot Tops'
+  //     default:
+  //       newSearchTerm = this.props.searchTerms
+  //   }
+  //   this.props.getSuperRecipe(newSearchTerm)
   // }
-
-  onOddsEndsButtonPress() {
-    this.props.navigator.push({
-      id: 'OddsEnds'
-    })
-  }
 
   render() {
     return (
@@ -55,6 +53,13 @@ class Results extends Component {
                 )
               })
           }
+          {/*
+          <Button
+            title='Feeling Super Frugal'
+            color='#841584'
+            onPress={this.onSuperFrugalPress}
+          />
+          */}
         </ScrollView>
       </View>
     )
@@ -93,6 +98,9 @@ const mapState = (state) => ({
 const mapDispatch = (dispatch) => ({
   getRecipes: (query) => {
     dispatch(ActionCreators.RecipeActions.getRecipesFromApi(query));
+  },
+  getSuperRecipe: (query) => {
+    dispatch(ActionCreators.RecipeActions.getSuperRecipeFromApi(query))
   }
 })
 

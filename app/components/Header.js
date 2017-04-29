@@ -10,7 +10,7 @@ import {
 export default function Header() {
   return (
     <View>
-      <Text style={styles.header}>Mottanai</Text>
+      <Text style={styles.header}>What's Left?</Text>
       <Text style={styles.intro}>Leftover ingredients in the fridge? Not sure what to do with your carrot tops? Enter an ingredient below for inspiration</Text>
     </View>
   )

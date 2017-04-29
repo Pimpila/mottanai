@@ -26,11 +26,11 @@ class Home extends Component {
   }
 
   onButtonPress() {
+    console.log('localState', this.state.searchTerms)
     this.props.setSearchTerms(this.state.searchTerms)
     this.props.getRecipes(this.state.searchTerms)
-    this.props.navigator.push({  // push Results container onto the navigator stack.
-      id: 'Results'
-    })
+    // first param passed to navigate is the screen you want to navigate to, second optional param is any param you want to pass onto the next screen which would be avail as state.params
+    this.props.navigation.navigate('Results')
   }
 
 
