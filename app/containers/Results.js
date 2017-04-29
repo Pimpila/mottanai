@@ -37,20 +37,10 @@ class Results extends Component {
     this.props.navigation.navigate('SuperFrugal')
   }
 
-  // onSuperFrugalPress() {
-  //   console.log('i pressed frugal button')
-  //   let newSearchTerm
-  //   switch (this.props.searchTerms) {
-  //     case 'Carrots':
-  //       newSearchTerm = 'Carrot Tops'
-  //       break
-  //     default:
-  //       newSearchTerm = this.props.searchTerms
-  //   }
-  //   console.log('newSearchTerm', newSearchTerm)
-  //   this.props.getSuperRecipe(newSearchTerm)
-  //   this.props.navigation.navigate('SuperFrugal')
-  // }
+   componentWillMount() {
+    console.log('i mounted and should be clearing the store')
+    return this.props.clearStore()
+  }
 
   render() {
     return (
@@ -120,6 +110,11 @@ const mapDispatch = (dispatch) => ({
   },
   getSuperRecipe: (query) => {
     dispatch(ActionCreators.RecipeActions.getSuperRecipeFromApi(query))
+  },
+  clearStore: () => {
+    dispatch(ActionCreators.RecipeActions.setRecipes([]))
+    dispatch(ActionCreators.RecipeActions.setSuperFrugal({}))
+    dispatch(ActionCreators.RecipeActions.setSearchTerms(''))
   }
 })
 
