@@ -17,7 +17,7 @@ import Header from '../components/Header'
 this.props = getRecipes
 */
 
-class Home extends Component {
+class Results extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -49,7 +49,7 @@ class Home extends Component {
         </View>
         <ScrollView style={styles.scrollSection}>
           {
-            !!this.props.recipes.length &&
+            !!this.props.recipes.length && // not hitting this block b/c recipes.length === 0
               this.props.recipes.map((recipe) => {
                 const imageUrl = recipe.images[0].hostedLargeUrl
                 return (
@@ -100,4 +100,4 @@ const mapDispatch = (dispatch) => ({
   }
 });
 
-export default connect(mapState, mapDispatch)(Home)
+export default connect(mapState, mapDispatch)(Results)

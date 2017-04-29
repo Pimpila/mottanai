@@ -4,7 +4,8 @@ import {
   Animated,
   StyleSheet,
   Text,
-  View
+  View,
+  Navigator,
 } from 'react-native'
 
 import ActionCreators from '../actions/index'
@@ -18,10 +19,25 @@ import Home from './Home'
 class AppContainer extends Component {
 
   render() {
-    return <Home />
+    return (
+      <Navigator
+        initialRoute={{
+          id: 'Home'
+        }}
+        renderScene={
+          this.navigatorRenderScene
+        }
+      />
+    )
   }
 
-
+  navigatorRenderScene(route, navigator) {
+    _navigator = navigator
+    switch (route.id) {
+      case 'Home':
+        return(<Home navigator={navigator} title='Home'/>)
+    }
+  }
 }
 
 // const styles = StyleSheet.create({

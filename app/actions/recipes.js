@@ -23,7 +23,8 @@ export const getRecipesFromApi = (ingredients) => {
     fetch(`https://api.yummly.com/v1/api/recipes?q=${params}`, {  // yummly search api call
       method: 'GET',
       headers: {
-
+        'X-Yummly-App-ID': '***REMOVED***',
+        'X-Yummly-App-Key': '***REMOVED***'
       }
     })
       .then(response => response.json())
@@ -35,7 +36,8 @@ export const getRecipesFromApi = (ingredients) => {
           return fetch(`https://api.yummly.com/v1/api/recipe/${recipe.id}`, {
             method: 'GET',
             headers: {
-
+              'X-Yummly-App-ID': '***REMOVED***',
+              'X-Yummly-App-Key': '***REMOVED***'
             }
           })
           .then(response => response.json())
