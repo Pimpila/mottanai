@@ -10,6 +10,8 @@ import {
 
 import ActionCreators from '../actions/index'
 import Home from './Home'
+import Results from './Results'
+import Recipe from './Recipe'
 
 /* this.props = {
   recipes:
@@ -36,6 +38,10 @@ class AppContainer extends Component {
     switch (route.id) {
       case 'Home':
         return(<Home navigator={navigator} title='Home'/>)
+      case 'Results':
+        return(<Results navigator={navigator} title='Results'/>)
+      case 'Recipe':
+        return(<Recipe navigator={navigator} title='Recipe'/>)
     }
   }
 }

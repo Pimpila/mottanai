@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux'
-import  setRecipesInStore from './recipes'
+import  { setRecipesInStore, setSearchTermsInStore } from './recipes'
 
 // this is your root reducer. keys you pass to combineReducers ends up being the props on your global store
 // left off here: recipes is set to undefined, not an empty array
 export default combineReducers({
-  recipes: setRecipesInStore
+  recipes: setRecipesInStore,
+  searchTerms: setSearchTermsInStore
 })

@@ -7,8 +7,8 @@ import {
   TextInput,
   Image,
   Button,
-  StyleSheet,
   Linking,
+  StyleSheet,
   TouchableHighlight} from 'react-native'
 
 import ActionCreators from '../actions/index'
@@ -18,38 +18,20 @@ import Header from '../components/Header'
 this.props = getRecipes
 */
 
-class Results extends Component {
-  // ?? two types of buttons on results page, images you can click to go to recipes or a button you can click to go to 'super mottanai' (carrot top pesto)
+class Recipe extends Component {
 
-  // need to define this
-  // openRecipe(recipeUrl) {
-  //   console.log('recipeUrl', recipeUrl)
-  //   Linking.openURL(recipeUrl)
-  // }
-
-  onOddsEndsButtonPress() {
-    this.props.navigator.push({
-      id: 'OddsEnds'
-    })
-  }
 
   render() {
     return (
       <View style={styles.scene}>
         <ScrollView style={styles.scrollSection}>
           {
-            !!this.props.recipes.length &&
+            !!this.props.recipes.length && // not hitting this block b/c recipes.length === 0
               this.props.recipes.map((recipe) => {
                 const imageUrl = recipe.images[0].hostedLargeUrl
-                const recipeUrl = recipe.source.sourceRecipeUrl
-                const openRecipe = () => {
-                  Linking.openURL(recipeUrl)
-                }
                 return (
                   <View key={recipe.id}>
-                    <TouchableHighlight onPress={openRecipe}>
-                      <Image source={{uri: imageUrl}} style={{height: 150}} />
-                    </TouchableHighlight>
+                    <Image source={{uri: imageUrl}} style={{height: 150}} onPress={openRecipe}/>
                     <Text>{recipe.name}</Text>
                   </View>
                 )
@@ -96,4 +78,4 @@ const mapDispatch = (dispatch) => ({
   }
 })
 
-export default connect(mapState, mapDispatch)(Results)
+export default connect(mapState, mapDispatch)(Recipe)
