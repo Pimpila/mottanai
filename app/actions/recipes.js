@@ -38,9 +38,8 @@ export const getRecipesFromApi = (ingredients) => {
     })
       .then(response => response.json())
       .then(recipes => {  // recipes.matches = arr that you then sort. take just the 1st three to filter by num ingredients
-        const sorted = recipes.matches.sort((a, b) => a.ingredients.length - b.ingredients.length)
+        const sorted = recipes.matches.sort((a, b) =>  b.rating - a.rating).sort((a,b) => a.ingredients.length - b.ingredients.length)
         const selectedRecipes = sorted.slice(0, 3)
-        console.log('selectedRecipes', selectedRecipes) // am logging this
         const actions = selectedRecipes.map((recipe) => { // for each selected recipe, do a yummly get recipe call for an arr of promises
           return fetch(`https://api.yummly.com/v1/api/recipe/${recipe.id}`, {
             method: 'GET',
@@ -56,7 +55,6 @@ export const getRecipesFromApi = (ingredients) => {
 
         Promise.all(actions)
           .then(results => { // results should be an arr of resolved promises
-            console.log('results after promise.all', results) // results showing as arr of undefineds
             dispatch(setRecipes(results)) // dispatch setRecipes passing in the recipes arr.
           })
           .catch(error => console.error(error))
@@ -77,7 +75,6 @@ export const getSuperRecipeFromApi = (ingredients) => {
     })
       .then(response => response.json())
       .then(recipes => {
-        console.log(recipes)
         const recipe = recipes.matches[0].id
         fetch(`https://api.yummly.com/v1/api/recipe/${recipe}`, {
           method: 'GET',
