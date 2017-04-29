@@ -77,7 +77,8 @@ export const getSuperRecipeFromApi = (ingredients) => {
     })
       .then(response => response.json())
       .then(recipes => {
-        const recipe = recipes[0].id
+        console.log(recipes)
+        const recipe = recipes.matches[0].id
         fetch(`https://api.yummly.com/v1/api/recipe/${recipe}`, {
           method: 'GET',
           headers: {
