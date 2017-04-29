@@ -22,12 +22,17 @@ class Home extends Component {
     super(props)
     this.state = {
       searchTerms: ''
-     }
+    }
   }
 
-  handleSearch() {
+  onButtonPress() {
+    this.props.setSearchTerms(this.state.searchTerms)
     this.props.getRecipes(this.state.searchTerms)
+    this.props.navigator.push({  // push Results container onto the navigator stack.
+      id: 'Results'
+    })
   }
+
 
   render() {
     return (
@@ -42,25 +47,11 @@ class Home extends Component {
             onChangeText={(input) => this.setState({searchTerms: input})}
             value={this.state.searchTerms} />
           <TouchableHighlight
-            onPress={ () => this.handleSearch() }
+            onPress={this.onButtonPress.bind(this)}
             color='#3d5c5c'>
             <Text>Get Recipes</Text>
           </TouchableHighlight>
         </View>
-        <ScrollView style={styles.scrollSection}>
-          {
-            !!this.props.recipes.length &&
-              this.props.recipes.map((recipe) => {
-                const imageUrl = recipe.images[0].hostedLargeUrl
-                return (
-                  <View key={recipe.id}>
-                    <Image source={{uri: imageUrl}} style={{height: 150}}/>
-                    <Text>{recipe.name}</Text>
-                  </View>
-                )
-              })
-          }
-        </ScrollView>
       </View>
     )
   }
@@ -91,12 +82,16 @@ const styles = StyleSheet.create({
 });
 
 const mapState = (state) => ({
-  recipes: state.recipes
+  recipes: state.recipes,
+  searchTerms: state.searchTerms
 });
 
 const mapDispatch = (dispatch) => ({
   getRecipes: (query) => {
     dispatch(ActionCreators.RecipeActions.getRecipesFromApi(query));
+  },
+  setSearchTerms: (searchTerms) => {
+    dispatch(ActionCreators.RecipeActions.setSearchTerms(searchTerms))
   }
 });
 

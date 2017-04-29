@@ -1,7 +1,7 @@
-import { SET_SELECTED_RECIPES } from '../actions/recipes'
+import { SET_SELECTED_RECIPES, SET_SEARCH_TERMS } from '../actions/recipes'
 
 
-function setRecipesInStore (state = [], action) {
+export function setRecipesInStore (state = [], action) {
   switch (action.type) {
     case SET_SELECTED_RECIPES:
       return action.recipes;
@@ -10,7 +10,11 @@ function setRecipesInStore (state = [], action) {
   }
 }
 
-export default setRecipesInStore
-
-
-
+export function setSearchTermsInStore (state = '', action) {
+  switch (action.type) {
+    case SET_SEARCH_TERMS:
+      return action.searchTerms;
+    default:
+      return state;
+  }
+}
