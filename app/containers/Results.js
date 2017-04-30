@@ -9,42 +9,45 @@ import {
   Linking,
   TouchableHighlight} from 'react-native'
 
+import Sorry from './Sorry'
+
 class Results extends Component {
 
-  onSuperFrugalPress() {
-    this.props.navigation.navigate('SuperFrugal')
-  }
-
   render() {
-    return (
-      <View style={styles.scene}>
-        <ScrollView style={styles.scrollSection}>
-          {
-            !!this.props.recipes.length &&
-              this.props.recipes.map((recipe) => {
-                const imageUrl = recipe.images[0].hostedLargeUrl
-                const recipeUrl = recipe.source.sourceRecipeUrl
-                const openRecipe = () => {
-                  Linking.openURL(recipeUrl)
-                }
-                return (
-                  <View key={recipe.id}>
-                    <TouchableHighlight onPress={openRecipe}>
-                      <View>
-                        <Image
-                        source={{uri: imageUrl}}
-                        style={styles.image}>
-                          <Text style={styles.recipeName}>{recipe.name}</Text>
-                        </Image>
-                      </View>
-                    </TouchableHighlight>
-                  </View>
-                )
-              })
-          }
-        </ScrollView>
-      </View>
-    )
+    if (this.props.recipes.length > 0) {
+      return (
+        <View style={styles.scene}>
+          <ScrollView style={styles.scrollSection}>
+            {
+              !!this.props.recipes.length &&
+                this.props.recipes.map((recipe) => {
+                  const imageUrl = recipe.images[0].hostedLargeUrl
+                  const recipeUrl = recipe.source.sourceRecipeUrl
+                  const openRecipe = () => {
+                    Linking.openURL(recipeUrl)
+                  }
+                  return (
+                    <View key={recipe.id}>
+                      <TouchableHighlight onPress={openRecipe}>
+                        <View>
+                          <Image
+                          source={{uri: imageUrl}}
+                          style={styles.image}>
+                            <Text style={styles.recipeName}>{recipe.name}</Text>
+                          </Image>
+                        </View>
+                      </TouchableHighlight>
+                    </View>
+                  )
+                })
+            }
+          </ScrollView>
+        </View>
+      )
+    }
+    else {
+      return <Sorry />
+    }
   }
 }
 
@@ -74,9 +77,6 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingRight: 15,
     backgroundColor: 'rgba(0,0,0, 0.35)'
-    // position: 'absolute',
-    // bottom: 5,
-    // right: 10
   }
 });
 
