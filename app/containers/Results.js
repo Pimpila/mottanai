@@ -4,19 +4,10 @@ import {
   ScrollView,
   View,
   Text,
-  TextInput,
   Image,
-  Button,
   StyleSheet,
   Linking,
   TouchableHighlight} from 'react-native'
-
-import ActionCreators from '../actions/index'
-import Header from '../components/Header'
-
-/*
-this.props = getRecipes
-*/
 
 class Results extends Component {
 
@@ -39,18 +30,17 @@ class Results extends Component {
                 return (
                   <View key={recipe.id}>
                     <TouchableHighlight onPress={openRecipe}>
-                      <Image source={{uri: imageUrl}} style={{height: 150}} />
+                      <View>
+                        <Image
+                        source={{uri: imageUrl}}
+                        style={{height: 240}} />
+                          <Text>{recipe.name}</Text>
+                      </View>
                     </TouchableHighlight>
-                    <Text>{recipe.name}</Text>
                   </View>
                 )
               })
           }
-          <Button
-            title='Feeling Super Frugal'
-            color='#841584'
-            onPress={this.onSuperFrugalPress.bind(this)}
-          />
         </ScrollView>
       </View>
     )
@@ -63,36 +53,13 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     marginTop: 20
   },
-  searchSection: {
-    height: 30,
-    flexDirection: 'row',
-    borderBottomColor: '#000',
-    borderBottomWidth: 1,
-    padding: 5,
-  },
   scrollSection: {
     flex: 0.8
-  },
-  searchButton: {
-    flex: 0.3,
-  },
-  searchInput: {
-    flex: 0.7,
-  },
+  }
 });
 
 const mapState = (state) => ({
-  recipes: state.recipes,
-  searchTerms: state.searchTerms
+  recipes: state.recipes
 })
 
-const mapDispatch = (dispatch) => ({
-  getRecipes: (query) => {
-    dispatch(ActionCreators.RecipeActions.getRecipesFromApi(query));
-  },
-  setFrugalSearchTerms: (searchTerms) => {
-    dispatch(ActionCreators.RecipeActions.setFrugalSearchTerms(searchTerms))
-  }
-})
-
-export default connect(mapState, mapDispatch)(Results)
+export default connect(mapState, null)(Results)

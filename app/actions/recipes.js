@@ -3,8 +3,8 @@ export const SET_SEARCH_TERMS = 'SET_SEARCH_TERMS'
 export const SET_FRUGAL_SEARCH_TERMS = 'SET_FRUGAL_SEARCH_TERMS'
 export const SET_SUPER_FRUGAL = 'SET_SUPER_FRUGAL'
 
-// sync action creator:
-// this action takes an array of recipes
+// sync action creators:
+
 export const setRecipes = (recipes) => {
   return {
     type: SET_SELECTED_RECIPES,
@@ -71,13 +71,13 @@ export const getRecipesFromApi = (ingredients) => {
   }
 }
 
-// calling this twice by accident!
+
 export const getSuperRecipeFromApi = (ingredients) => {
   console.log('Super ingredients', ingredients)
   const params = `${ingredients.split(' ').join('+')}&requirePictures=true`
   console.log('params', params)
   return (dispatch) => {
-    fetch(`https://api.yummly.com/v1/api/recipes?q=${params}`, {  // yummly search api call
+    fetch(`https://api.yummly.com/v1/api/recipes?q=${params}`, {
       method: 'GET',
       headers: {
         'X-Yummly-App-ID': '***REMOVED***',
@@ -114,9 +114,17 @@ export const getFrugalSearchTerms = (oldSearch) => {
     if (oldSearch.includes('turnip')) newSearch = 'turnip greens'
     if (oldSearch.includes('lemon')) newSearch = 'lemon peel'
     if (oldSearch.includes('orange')) newSearch = 'orange peel'
- console.log('inside thunk to set frugal search terms, NEW', newSearch)
-    return (dispatch) => {
-      dispatch(setFrugalSearchTerms(newSearch))
-      dispatch(getSuperRecipeFromApi(newSearch))
-    }
+    console.log('newSearch', newSearch, 'boolean', !!newSearch)
+
+      return (dispatch) => {
+        if (!!newSearch) {
+          dispatch(setFrugalSearchTerms(newSearch))
+          dispatch(getSuperRecipeFromApi(newSearch))
+        }
+        else {
+          dispatch(setFrugalSearchTerms(''))
+          dispatch(setSuperFrugal({}))
+        }
+      }
+
 }
