@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255, 255, 255, .85)'
   },
   header: {
-    flex: .3,
+    // flex: .3,
     fontSize: 50,
     backgroundColor: 'rgba(0,0,0,0)',
     color: '#3d5c5c',
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   intro: {
-    flex: 1,
+    // flex: 1,
     color: '#3d5c5c',
     fontSize: 20,
     backgroundColor: 'rgba(0,0,0,0)',
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   },
   searchSection: {
     // flex: 1,
-    height: 30,
+    // height: 30,
     flexDirection: 'row',
     // justifyContent: 'space-between',
     alignItems: 'flex-end',
