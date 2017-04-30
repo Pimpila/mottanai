@@ -28,7 +28,7 @@ export function setFrugalSearchTermsInStore (state = '', action) {
   }
 }
 
-export function setSuperFrugal (state = {}, action) {
+export function setSuperFrugal (state = [], action) {
   switch (action.type) {
     case SET_SUPER_FRUGAL:
       return action.superRecipe

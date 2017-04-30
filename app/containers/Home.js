@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(255, 255, 255, .75)'
+    backgroundColor: 'rgba(255, 255, 255, .85)'
   },
   header: {
     flex: .3,

@@ -45,9 +45,9 @@ export const getRecipesFromApi = (ingredients) => {
       }
     })
       .then(response => response.json())
-      .then(recipes => {  // recipes.matches = arr that you then sort. take just the 1st three to filter by num ingredients
+      .then(recipes => {  // recipes.matches = arr that you then sort. sort by num ingredient then take first 10
         const sorted = recipes.matches.sort((a, b) =>  b.rating - a.rating).sort((a,b) => a.ingredients.length - b.ingredients.length)
-        const selectedRecipes = sorted.slice(0, 3)
+        const selectedRecipes = sorted.slice(0, 10)
         const actions = selectedRecipes.map((recipe) => { // for each selected recipe, do a yummly get recipe call for an arr of promises
           return fetch(`https://api.yummly.com/v1/api/recipe/${recipe.id}`, {
             method: 'GET',
@@ -72,10 +72,38 @@ export const getRecipesFromApi = (ingredients) => {
 }
 
 
+// export const getSuperRecipeFromApi = (ingredients) => {
+//   console.log('Super ingredients', ingredients)
+//   const params = `${ingredients.split(' ').join('+')}&requirePictures=true`
+//   console.log('params', params)
+//   return (dispatch) => {
+//     fetch(`https://api.yummly.com/v1/api/recipes?q=${params}`, {
+//       method: 'GET',
+//       headers: {
+//         'X-Yummly-App-ID': '***REMOVED***',
+//         'X-Yummly-App-Key': '***REMOVED***'
+//       }
+//     })
+//       .then(response => response.json())
+//       .then(recipes => {
+//         const recipe = recipes.matches[0].id
+//         fetch(`https://api.yummly.com/v1/api/recipe/${recipe}`, {
+//           method: 'GET',
+//           headers: {
+//             'X-Yummly-App-ID': '***REMOVED***',
+//             'X-Yummly-App-Key': '***REMOVED***'
+//           }
+//         })
+//         .then(response => response.json())
+//         .then(recipe => dispatch(setSuperFrugal(recipe)))
+//         .catch(error => console.error(error))
+//       })
+//       .catch(error => console.error(error))
+//   }
+// }
+
 export const getSuperRecipeFromApi = (ingredients) => {
-  console.log('Super ingredients', ingredients)
   const params = `${ingredients.split(' ').join('+')}&requirePictures=true`
-  console.log('params', params)
   return (dispatch) => {
     fetch(`https://api.yummly.com/v1/api/recipes?q=${params}`, {
       method: 'GET',
@@ -86,17 +114,24 @@ export const getSuperRecipeFromApi = (ingredients) => {
     })
       .then(response => response.json())
       .then(recipes => {
-        const recipe = recipes.matches[0].id
-        fetch(`https://api.yummly.com/v1/api/recipe/${recipe}`, {
-          method: 'GET',
-          headers: {
-            'X-Yummly-App-ID': '***REMOVED***',
-            'X-Yummly-App-Key': '***REMOVED***'
-          }
-        })
-        .then(response => response.json())
-        .then(recipe => dispatch(setSuperFrugal(recipe)))
-        .catch(error => console.error(error))
+        const sorted = recipes.matches.sort((a,b) => a.ingredients.length - b.ingredients.length)
+        const selectedRecipes = sorted.slice(0, 3)
+        const actions = selectedRecipes.map((recipe) => {
+          return fetch(`https://api.yummly.com/v1/api/recipe/${recipe.id}`, {
+            method: 'GET',
+            headers: {
+              'X-Yummly-App-ID': '***REMOVED***',
+              'X-Yummly-App-Key': '***REMOVED***'
+            }
+          })
+            .then(response => response.json())
+            .then(recipe => recipe)
+            .catch(error => console.error(error))
+        }) // end of map
+
+        Promise.all(actions)
+          .then(results => dispatch(setSuperFrugal(results)))
+          .catch(error => console.error(error))
       })
       .catch(error => console.error(error))
   }
@@ -123,7 +158,7 @@ export const getFrugalSearchTerms = (oldSearch) => {
         }
         else {
           dispatch(setFrugalSearchTerms(''))
-          dispatch(setSuperFrugal({}))
+          dispatch(setSuperFrugal([]))
         }
       }
 
