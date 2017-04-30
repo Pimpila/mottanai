@@ -1,5 +1,6 @@
 export const SET_SELECTED_RECIPES = 'SET_SELECTED_RECIPES'
 export const SET_SEARCH_TERMS = 'SET_SEARCH_TERMS'
+export const SET_FRUGAL_SEARCH_TERMS = 'SET_FRUGAL_SEARCH_TERMS'
 export const SET_SUPER_FRUGAL = 'SET_SUPER_FRUGAL'
 
 // sync action creator:
@@ -14,6 +15,13 @@ export const setRecipes = (recipes) => {
 export const setSearchTerms = (searchTerms) => {
   return {
     type: SET_SEARCH_TERMS,
+    searchTerms
+  }
+}
+
+export const setFrugalSearchTerms = (searchTerms) => {
+  return {
+    type: SET_FRUGAL_SEARCH_TERMS,
     searchTerms
   }
 }
@@ -63,8 +71,11 @@ export const getRecipesFromApi = (ingredients) => {
   }
 }
 
+// calling this twice by accident!
 export const getSuperRecipeFromApi = (ingredients) => {
+  console.log('Super ingredients', ingredients)
   const params = `${ingredients.split(' ').join('+')}&requirePictures=true`
+  console.log('params', params)
   return (dispatch) => {
     fetch(`https://api.yummly.com/v1/api/recipes?q=${params}`, {  // yummly search api call
       method: 'GET',
@@ -89,4 +100,23 @@ export const getSuperRecipeFromApi = (ingredients) => {
       })
       .catch(error => console.error(error))
   }
+}
+
+export const getFrugalSearchTerms = (oldSearch) => {
+  console.log('inside thunk to set frugal search terms, OLD', oldSearch)
+    let newSearch
+    if (oldSearch.includes('carrot')) newSearch = 'carrot tops'
+    if (oldSearch.includes('beets')) newSearch = 'beet greens'
+    if (oldSearch.includes('chicken')) newSearch = 'chicken skin'
+    if (oldSearch.includes('watermelon')) newSearch = 'watermelon rind'
+    if (oldSearch.includes('parmesan')) newSearch = 'parmesan rind'
+    if (oldSearch.includes('radish')) newSearch = 'radish greens'
+    if (oldSearch.includes('turnip')) newSearch = 'turnip greens'
+    if (oldSearch.includes('lemon')) newSearch = 'lemon peel'
+    if (oldSearch.includes('orange')) newSearch = 'orange peel'
+ console.log('inside thunk to set frugal search terms, NEW', newSearch)
+    return (dispatch) => {
+      dispatch(setFrugalSearchTerms(newSearch))
+      dispatch(getSuperRecipeFromApi(newSearch))
+    }
 }

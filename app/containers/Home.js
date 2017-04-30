@@ -26,10 +26,17 @@ class Home extends Component {
   }
 
   onButtonPress() {
-    this.props.setSearchTerms(this.state.searchTerms)
-    this.props.getRecipes(this.state.searchTerms)
-    // first param passed to navigate is the screen you want to navigate to, second optional param is any param you want to pass onto the next screen which would be avail as state.params
-    this.props.navigation.navigate('Results')
+    const setSearch = this.props.setSearchTerms(this.state.searchTerms)
+    const getFrugalSearch = this.props.getFrugalSearchTerms(this.state.searchTerms)
+    const getRecipes = this.props.getRecipes(this.state.searchTerms)
+
+    Promise.all([setSearch, getFrugalSearch, getRecipes])
+      .then(resolvedArr => {
+        console.log('this.props inside promise all home onButtonpress', this.props)
+        // first param passed to navigate is the screen you want to navigate to, second optional param is any param you want to pass onto the next screen which would be avail as state.params
+        return this.props.navigation.navigate('Results')
+      })
+      .catch(err => console.error(err))
   }
 
 
@@ -83,7 +90,8 @@ const styles = StyleSheet.create({
 
 const mapState = (state) => ({
   recipes: state.recipes,
-  searchTerms: state.searchTerms
+  searchTerms: state.searchTerms,
+  frugalSearchTerms: state.frugalSearchTerms
 });
 
 const mapDispatch = (dispatch) => ({
@@ -92,7 +100,13 @@ const mapDispatch = (dispatch) => ({
   },
   setSearchTerms: (searchTerms) => {
     dispatch(ActionCreators.RecipeActions.setSearchTerms(searchTerms))
-  }
+  },
+  getFrugalSearchTerms: (searchTerms) => {
+    dispatch(ActionCreators.RecipeActions.getFrugalSearchTerms(searchTerms))
+  },
+  getSuperRecipe: (query) => {
+    dispatch(ActionCreators.RecipeActions.getSuperRecipeFromApi(query))
+  },
 });
 
 export default connect(mapState, mapDispatch)(Home)

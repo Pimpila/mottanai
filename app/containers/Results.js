@@ -20,26 +20,8 @@ this.props = getRecipes
 
 class Results extends Component {
 
- onSuperFrugalPress() {
-    let newSearchTerm
-
-    if (this.props.searchTerms.includes('carrot')) newSearchTerm = 'carrot tops'
-    if (this.props.searchTerms.includes('beets')) newSearchTerm = 'beet greens'
-    if (this.props.searchTerms.includes('chicken')) newSearchTerm = 'chicken skin'
-    if (this.props.searchTerms.includes('watermelon')) newSearchTerm = 'watermelon rind'
-    if (this.props.searchTerms.includes('parmesan')) newSearchTerm = 'parmesan rind'
-    if (this.props.searchTerms.includes('radish')) newSearchTerm = 'radish greens'
-    if (this.props.searchTerms.includes('turnip')) newSearchTerm = 'turnip greens'
-    if (this.props.searchTerms.includes('lemon')) newSearchTerm = 'lemon peel'
-    if (this.props.searchTerms.includes('orange')) newSearchTerm = 'orange peel'
-    console.log('newSearchTerm', newSearchTerm)
-    this.props.getSuperRecipe(newSearchTerm)
+  onSuperFrugalPress() {
     this.props.navigation.navigate('SuperFrugal')
-  }
-
-   componentWillMount() {
-    console.log('i mounted and should be clearing the store')
-    return this.props.clearStore()
   }
 
   render() {
@@ -108,13 +90,8 @@ const mapDispatch = (dispatch) => ({
   getRecipes: (query) => {
     dispatch(ActionCreators.RecipeActions.getRecipesFromApi(query));
   },
-  getSuperRecipe: (query) => {
-    dispatch(ActionCreators.RecipeActions.getSuperRecipeFromApi(query))
-  },
-  clearStore: () => {
-    dispatch(ActionCreators.RecipeActions.setRecipes([]))
-    dispatch(ActionCreators.RecipeActions.setSuperFrugal({}))
-    dispatch(ActionCreators.RecipeActions.setSearchTerms(''))
+  setFrugalSearchTerms: (searchTerms) => {
+    dispatch(ActionCreators.RecipeActions.setFrugalSearchTerms(searchTerms))
   }
 })
 
