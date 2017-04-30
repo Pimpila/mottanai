@@ -39,24 +39,22 @@ class Home extends Component {
         source={{uri: 'http://theinspirationgrid.com/wp-content/uploads/2014/05/photography-julie-lee-02.jpg'}}
         style={styles.scene}>
           <View style={styles.container}>
-            <Text style={styles.header}>What's Left?</Text>
-            <Text style={styles.intro}>Leftover ingredients in the fridge? Not sure what to do with your carrot tops? Enter an ingredient below for inspiration</Text>
-            {/*
-            <View style={styles.searchSection}>
-              <TextInput style={styles.searchInput}
-                autoCapitalize='none'
-                placeholder='Ingredients'
-                returnKeyType='search'
-                onChangeText={(input) => this.setState({ searchTerms: input })}
-                value={this.state.searchTerms} />
-              <TouchableHighlight
-                onPress={this.onButtonPress.bind(this)}
-                color='#3d5c5c'>
-                <Text>Get Recipes</Text>
-              </TouchableHighlight>
+              <Text style={styles.header}>What's Left?</Text>
+              <Text style={styles.intro}>Leftover ingredients in the fridge? Not sure what to do with your carrot tops? Enter an ingredient below for inspiration.</Text>
+              <View style={styles.searchSection}>
+                <TextInput style={styles.searchInput}
+                  autoCapitalize='none'
+                  placeholder='Ingredients'
+                  returnKeyType='search'
+                  onChangeText={(input) => this.setState({ searchTerms: input })}
+                  value={this.state.searchTerms} />
+                <TouchableHighlight
+                  onPress={this.onButtonPress.bind(this)}
+                  style={styles.searchButton}>
+                  <Text color='#3d5c5c'>Get Recipes</Text>
+                </TouchableHighlight>
+              </View>
             </View>
-          */}
-        </View>
         </Image>
     )
   }
@@ -69,13 +67,18 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 20
+    // marginTop: 20
   },
   container: {
-    flex: .5
+    width: 300,
+    height: 350,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(255, 255, 255, .75)'
   },
   header: {
-    flex: 2,
+    flex: .3,
     fontSize: 50,
     backgroundColor: 'rgba(0,0,0,0)',
     color: '#3d5c5c',
@@ -83,22 +86,31 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   intro: {
-    flex: 2,
+    flex: 1,
     color: '#3d5c5c',
+    fontSize: 20,
     backgroundColor: 'rgba(0,0,0,0)',
     marginVertical: 20,
     marginHorizontal: 20,
   },
   searchSection: {
-    flex: 1,
+    // flex: 1,
     height: 30,
     flexDirection: 'row',
+    // justifyContent: 'space-between',
+    alignItems: 'flex-end',
     borderBottomColor: '#000',
     borderBottomWidth: 1,
     padding: 5,
+    marginBottom: 25,
+    marginHorizontal: 10
   },
   searchInput: {
     flex: 0.7,
+    textAlign: 'left',
+  },
+  searchButton: {
+    flex: 0.3,
   },
 });
 
