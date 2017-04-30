@@ -1,21 +1,15 @@
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import {
-  ScrollView,
   View,
   Text,
   TextInput,
-  Image,
-  Button,
   StyleSheet,
-  TouchableHighlight} from 'react-native'
+  TouchableHighlight
+} from 'react-native'
 
 import ActionCreators from '../actions/index'
-import Header from '../components/Header'
 
-/*
-this.props = getRecipes
-*/
 
 class Home extends Component {
   constructor(props) {
@@ -32,26 +26,25 @@ class Home extends Component {
 
     Promise.all([setSearch, getFrugalSearch, getRecipes])
       .then(resolvedArr => {
-        console.log('this.props inside promise all home onButtonpress', this.props)
         // first param passed to navigate is the screen you want to navigate to, second optional param is any param you want to pass onto the next screen which would be avail as state.params
         return this.props.navigation.navigate('Results')
       })
       .catch(err => console.error(err))
   }
 
-
   render() {
     return (
       <View style={styles.scene}>
         <View>
-          <Header />
+          <Text style={styles.header}>What's Left?</Text>
+          <Text style={styles.intro}>Leftover ingredients in the fridge? Not sure what to do with your carrot tops? Enter an ingredient below for inspiration</Text>
         </View>
         <View style={styles.searchSection}>
           <TextInput style={styles.searchInput}
             autoCapitalize='none'
             placeholder='Ingredients'
             returnKeyType='search'
-            onChangeText={(input) => this.setState({searchTerms: input})}
+            onChangeText={(input) => this.setState({ searchTerms: input })}
             value={this.state.searchTerms} />
           <TouchableHighlight
             onPress={this.onButtonPress.bind(this)}
@@ -70,6 +63,17 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     marginTop: 20
   },
+  header: {
+    fontSize: 50,
+    color: '#3d5c5c',
+    marginTop: 30,
+    textAlign: 'center',
+  },
+  intro: {
+    color: '#3d5c5c',
+    marginVertical: 20,
+    marginHorizontal: 20,
+  },
   searchSection: {
     height: 30,
     flexDirection: 'row',
@@ -77,22 +81,11 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     padding: 5,
   },
-  scrollSection: {
-    flex: 0.8
-  },
-  searchButton: {
-    flex: 0.3,
-  },
   searchInput: {
     flex: 0.7,
   },
 });
 
-const mapState = (state) => ({
-  recipes: state.recipes,
-  searchTerms: state.searchTerms,
-  frugalSearchTerms: state.frugalSearchTerms
-});
 
 const mapDispatch = (dispatch) => ({
   getRecipes: (query) => {
@@ -109,4 +102,4 @@ const mapDispatch = (dispatch) => ({
   },
 });
 
-export default connect(mapState, mapDispatch)(Home)
+export default connect(null, mapDispatch)(Home)
