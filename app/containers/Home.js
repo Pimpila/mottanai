@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import {
   View,
+  Image,
   Text,
   TextInput,
   StyleSheet,
@@ -34,47 +35,62 @@ class Home extends Component {
 
   render() {
     return (
-      <View style={styles.scene}>
-        <View>
-          <Text style={styles.header}>What's Left?</Text>
-          <Text style={styles.intro}>Leftover ingredients in the fridge? Not sure what to do with your carrot tops? Enter an ingredient below for inspiration</Text>
+        <Image
+        source={{uri: 'http://theinspirationgrid.com/wp-content/uploads/2014/05/photography-julie-lee-02.jpg'}}
+        style={styles.scene}>
+          <View style={styles.container}>
+            <Text style={styles.header}>What's Left?</Text>
+            <Text style={styles.intro}>Leftover ingredients in the fridge? Not sure what to do with your carrot tops? Enter an ingredient below for inspiration</Text>
+            {/*
+            <View style={styles.searchSection}>
+              <TextInput style={styles.searchInput}
+                autoCapitalize='none'
+                placeholder='Ingredients'
+                returnKeyType='search'
+                onChangeText={(input) => this.setState({ searchTerms: input })}
+                value={this.state.searchTerms} />
+              <TouchableHighlight
+                onPress={this.onButtonPress.bind(this)}
+                color='#3d5c5c'>
+                <Text>Get Recipes</Text>
+              </TouchableHighlight>
+            </View>
+          */}
         </View>
-        <View style={styles.searchSection}>
-          <TextInput style={styles.searchInput}
-            autoCapitalize='none'
-            placeholder='Ingredients'
-            returnKeyType='search'
-            onChangeText={(input) => this.setState({ searchTerms: input })}
-            value={this.state.searchTerms} />
-          <TouchableHighlight
-            onPress={this.onButtonPress.bind(this)}
-            color='#3d5c5c'>
-            <Text>Get Recipes</Text>
-          </TouchableHighlight>
-        </View>
-      </View>
+        </Image>
     )
   }
 }
 
+// flex of 1 is entire screen. if you had two children component also flex 1, they each would be 1/2 of that parent container.
 const styles = StyleSheet.create({
   scene: {
-    flex: 1, // flex of 1 is entire screen. if you had two children component also flex 1, they each would be 1/2 of that parent container.
+    flex: 1,
     flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
     marginTop: 20
   },
+  container: {
+    flex: .5
+  },
   header: {
+    flex: 2,
     fontSize: 50,
+    backgroundColor: 'rgba(0,0,0,0)',
     color: '#3d5c5c',
     marginTop: 30,
     textAlign: 'center',
   },
   intro: {
+    flex: 2,
     color: '#3d5c5c',
+    backgroundColor: 'rgba(0,0,0,0)',
     marginVertical: 20,
     marginHorizontal: 20,
   },
   searchSection: {
+    flex: 1,
     height: 30,
     flexDirection: 'row',
     borderBottomColor: '#000',

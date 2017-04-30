@@ -33,8 +33,9 @@ class Results extends Component {
                       <View>
                         <Image
                         source={{uri: imageUrl}}
-                        style={{height: 240}} />
-                          <Text>{recipe.name}</Text>
+                        style={styles.image}>
+                          <Text style={styles.recipeName}>{recipe.name}</Text>
+                        </Image>
                       </View>
                     </TouchableHighlight>
                   </View>
@@ -49,12 +50,33 @@ class Results extends Component {
 
 const styles = StyleSheet.create({
   scene: {
-    flex: 1, // flex of 1 is entire screen. if you had two children component also flex 1, they each would be 1/2 of that parent container.
+    flex: 1,
     flexDirection: 'column',
-    marginTop: 20
+    marginTop: 20,
+    justifyContent: 'space-between'
   },
   scrollSection: {
     flex: 0.8
+  },
+  image: {
+    height: 240,
+    margin: 20,
+    flex: 1,
+    justifyContent: 'flex-end'
+  },
+  recipeName: {
+    fontFamily: 'Avenir-Heavy',
+    color: 'white',
+    fontSize: 20,
+    flexDirection: 'row',
+    textAlign: 'right',
+    paddingBottom: 10,
+    paddingTop: 10,
+    paddingRight: 15,
+    backgroundColor: 'rgba(0,0,0, 0.35)'
+    // position: 'absolute',
+    // bottom: 5,
+    // right: 10
   }
 });
 
