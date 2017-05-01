@@ -25,11 +25,12 @@ class Home extends Component {
     const setSearchTerms = this.props.setSearchTerms(this.state.searchTerms)
     const getFrugalSearch = this.props.getFrugalSearchTerms(this.state.searchTerms)
     const getRecipes = this.props.getRecipes(this.state.searchTerms)
-    // add setSEarching call here. set searching to false.
+
     Promise.all([ setSearching, setSearchTerms, getFrugalSearch, getRecipes])
       .then(resolvedArr => {
         // set searching to false so serch results will render on results screen
-       return this.props.setSearching(false)
+        console.log('resolvedPromises', resolvedArr)
+        return this.props.setSearching(false)
       })
         // first param passed to navigate is the screen you want to navigate to, second optional param is any param you want to pass onto the next screen which would be avail as state.params
       .then(() => this.props.navigation.navigate('Results'))
