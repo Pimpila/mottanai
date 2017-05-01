@@ -13,6 +13,11 @@ import {
 import Sorry from './Sorry'
 
 class SuperFrugal extends Component {
+
+  componentDidMount() {
+    console.log('SuperFrugal mounted!')
+  }
+
   render() {
     if (this.props.superRecipe.length > 0) {
       return (

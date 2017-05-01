@@ -1,9 +1,18 @@
+export const SET_SEARCHING = 'SET_SEARCHING'
 export const SET_SELECTED_RECIPES = 'SET_SELECTED_RECIPES'
 export const SET_SEARCH_TERMS = 'SET_SEARCH_TERMS'
 export const SET_FRUGAL_SEARCH_TERMS = 'SET_FRUGAL_SEARCH_TERMS'
 export const SET_SUPER_FRUGAL = 'SET_SUPER_FRUGAL'
 
+
 // sync action creators:
+
+export const setSearching = (bool) => {
+  return {
+    type: SET_SEARCHING,
+    searching: bool
+  }
+}
 
 export const setRecipes = (recipes) => {
   return {
@@ -138,7 +147,6 @@ export const getSuperRecipeFromApi = (ingredients) => {
 }
 
 export const getFrugalSearchTerms = (oldSearch) => {
-  console.log('inside thunk to set frugal search terms, OLD', oldSearch)
     let newSearch
     if (oldSearch.includes('carrot')) newSearch = 'carrot tops'
     if (oldSearch.includes('beets')) newSearch = 'beet greens'
@@ -149,7 +157,6 @@ export const getFrugalSearchTerms = (oldSearch) => {
     if (oldSearch.includes('turnip')) newSearch = 'turnip greens'
     if (oldSearch.includes('lemon')) newSearch = 'lemon peel'
     if (oldSearch.includes('orange')) newSearch = 'orange peel'
-    console.log('newSearch', newSearch, 'boolean', !!newSearch)
 
       return (dispatch) => {
         if (!!newSearch) {

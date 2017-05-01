@@ -21,15 +21,18 @@ class Home extends Component {
   }
 
   onButtonPress() {
-    const setSearch = this.props.setSearchTerms(this.state.searchTerms)
+    const setSearching = this.props.setSearching(true)
+    const setSearchTerms = this.props.setSearchTerms(this.state.searchTerms)
     const getFrugalSearch = this.props.getFrugalSearchTerms(this.state.searchTerms)
     const getRecipes = this.props.getRecipes(this.state.searchTerms)
-
-    Promise.all([setSearch, getFrugalSearch, getRecipes])
+    // add setSEarching call here. set searching to false.
+    Promise.all([ setSearching, setSearchTerms, getFrugalSearch, getRecipes])
       .then(resolvedArr => {
-        // first param passed to navigate is the screen you want to navigate to, second optional param is any param you want to pass onto the next screen which would be avail as state.params
-        return this.props.navigation.navigate('Results')
+        // set searching to false so serch results will render on results screen
+       return this.props.setSearching(false)
       })
+        // first param passed to navigate is the screen you want to navigate to, second optional param is any param you want to pass onto the next screen which would be avail as state.params
+      .then(() => this.props.navigation.navigate('Results'))
       .catch(err => console.error(err))
   }
 
@@ -114,10 +117,16 @@ const styles = StyleSheet.create({
   },
 });
 
+const mapState = (state) => ({
+  searching: state.searching
+})
 
 const mapDispatch = (dispatch) => ({
+  setSearching: (bool) => {
+    dispatch(ActionCreators.RecipeActions.setSearching(bool))
+  },
   getRecipes: (query) => {
-    dispatch(ActionCreators.RecipeActions.getRecipesFromApi(query));
+    dispatch(ActionCreators.RecipeActions.getRecipesFromApi(query))
   },
   setSearchTerms: (searchTerms) => {
     dispatch(ActionCreators.RecipeActions.setSearchTerms(searchTerms))
