@@ -9,12 +9,21 @@ import {
   Linking,
   TouchableHighlight} from 'react-native'
 
+import ActionCreators from '../actions/index'
 import Sorry from './Sorry'
 
 class Results extends Component {
 
+  componentDidMount() {
+    console.log('Results mounted!')
+  }
+
   render() {
-    if (this.props.recipes.length > 0) {
+    console.log('inside Results Render method. Searching is set to: ', this.props.searching)
+    if (this.props.searching) {
+      return <Text>Loading...</Text>
+    }
+    else if (this.props.recipes.length > 0) {
       return (
         <View style={styles.scene}>
           <ScrollView style={styles.scrollSection}>
@@ -81,7 +90,14 @@ const styles = StyleSheet.create({
 });
 
 const mapState = (state) => ({
-  recipes: state.recipes
+  recipes: state.recipes,
+  searching: state.searching
 })
 
-export default connect(mapState, null)(Results)
+const mapDispatch = (dispatch) => ({
+  setSearching: (bool) => {
+    dispatch(ActionCreators.RecipeActions.setSearching(bool))
+  }
+})
+
+export default connect(mapState, mapDispatch)(Results)
