@@ -19,7 +19,10 @@ class SuperFrugal extends Component {
   }
 
   render() {
-    if (this.props.superRecipe.length > 0) {
+    if (this.props.searching) {
+      return <Text></Text>
+    }
+    else if (this.props.superRecipe.length > 0) {
       return (
         <View style={styles.scene}>
           <ScrollView style={styles.scrollSection}>
@@ -86,7 +89,8 @@ const styles = StyleSheet.create({
 });
 
 const mapState = (state) => ({
-  superRecipe: state.superRecipe
+  superRecipe: state.superRecipe,
+  searching: state.searching
 })
 
 export default connect(mapState, null)(SuperFrugal)

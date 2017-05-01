@@ -51,7 +51,8 @@ class Home extends Component {
                   placeholder='Ingredients'
                   returnKeyType='search'
                   onChangeText={(input) => this.setState({ searchTerms: input })}
-                  value={this.state.searchTerms} />
+                  value={this.state.searchTerms}
+                  />
                 <TouchableHighlight
                   onPress={this.onButtonPress.bind(this)}
                   style={styles.searchButton}>
