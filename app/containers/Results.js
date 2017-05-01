@@ -18,10 +18,19 @@ class Results extends Component {
     console.log('Results mounted!')
   }
 
+  shouldComponentUpdate(nextProps) {
+    if (this.props.searching === false) {
+      return true
+    }
+    else {
+      return false
+    }
+  }
+
   render() {
     console.log('inside Results Render method. Searching is set to: ', this.props.searching)
     if (this.props.searching) {
-      return <Text>Loading...</Text>
+      return <Text></Text>
     }
     else if (this.props.recipes.length > 0) {
       return (
