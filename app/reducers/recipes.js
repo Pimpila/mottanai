@@ -1,5 +1,14 @@
-import { SET_SELECTED_RECIPES, SET_SEARCH_TERMS, SET_FRUGAL_SEARCH_TERMS, SET_SUPER_FRUGAL } from '../actions/recipes'
+import { SET_SEARCHING, SET_SELECTED_RECIPES, SET_SEARCH_TERMS, SET_FRUGAL_SEARCH_TERMS, SET_SUPER_FRUGAL } from '../actions/recipes'
 
+
+export function setSearching (state=true, action) {
+  switch (action.type) {
+    case SET_SEARCHING:
+      return action.searching
+    default:
+     return state
+  }
+}
 
 export function setRecipesInStore (state = [], action) {
   switch (action.type) {

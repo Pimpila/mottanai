@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux'
-import  { setRecipesInStore, setSearchTermsInStore, setFrugalSearchTermsInStore, setSuperFrugal } from './recipes'
+import  { setSearching, setRecipesInStore, setSearchTermsInStore, setFrugalSearchTermsInStore, setSuperFrugal } from './recipes'
 
 export default combineReducers({
+  searching: setSearching,
   recipes: setRecipesInStore,
   searchTerms: setSearchTermsInStore,
   frugalSearchTerms: setFrugalSearchTermsInStore,
