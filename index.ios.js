@@ -10,6 +10,7 @@ import {
   View
 } from 'react-native'
 
+console.disableYellowBox = true;
 
 // this func, passed to AppRegistry just wraps our AppContainer with the store and runs the AppContainer
 const App = () => (

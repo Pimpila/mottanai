@@ -14,10 +14,6 @@ import Sorry from './Sorry'
 
 class Results extends Component {
 
-  componentDidMount() {
-    console.log('Results mounted!')
-  }
-
   shouldComponentUpdate(nextProps) {
     if (this.props.searching === false) {
       return true
@@ -28,7 +24,6 @@ class Results extends Component {
   }
 
   render() {
-    console.log('inside Results Render method. Searching is set to: ', this.props.searching)
     if (this.props.searching) {
       return <Text></Text>
     }

@@ -14,10 +14,6 @@ import Sorry from './Sorry'
 
 class SuperFrugal extends Component {
 
-  componentDidMount() {
-    console.log('SuperFrugal mounted!')
-  }
-
   render() {
     if (this.props.searching) {
       return <Text></Text>
