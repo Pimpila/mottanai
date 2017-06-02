@@ -28,7 +28,7 @@ class Home extends Component {
 
     Promise.all([ setSearching, setSearchTerms, getFrugalSearch, getRecipes])
       .then(resolvedArr => {
-        // set searching to false so serch results will render on results screen
+        // set searching to false so search results will render on results screen
         return this.props.setSearching(false)
       })
         // first param passed to navigate is the screen you want to navigate to, second optional param is any param you want to pass onto the next screen which would be avail as state.params
@@ -131,9 +131,6 @@ const mapDispatch = (dispatch) => ({
   getFrugalSearchTerms: (searchTerms) => {
     dispatch(ActionCreators.RecipeActions.getFrugalSearchTerms(searchTerms))
   },
-  // getSuperRecipe: (query) => {
-  //   dispatch(ActionCreators.RecipeActions.getSuperRecipeFromApi(query))
-  // },
 });
 
 export default connect(null, mapDispatch)(Home)
