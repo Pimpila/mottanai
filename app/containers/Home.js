@@ -29,7 +29,6 @@ class Home extends Component {
     Promise.all([ setSearching, setSearchTerms, getFrugalSearch, getRecipes])
       .then(resolvedArr => {
         // set searching to false so serch results will render on results screen
-        console.log('resolvedPromises', resolvedArr)
         return this.props.setSearching(false)
       })
         // first param passed to navigate is the screen you want to navigate to, second optional param is any param you want to pass onto the next screen which would be avail as state.params
@@ -65,14 +64,13 @@ class Home extends Component {
   }
 }
 
-// flex of 1 is entire screen. if you had two children component also flex 1, they each would be 1/2 of that parent container.
+
 const styles = StyleSheet.create({
   scene: {
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    // marginTop: 20
   },
   container: {
     width: 300,
@@ -83,7 +81,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255, 255, 255, .85)'
   },
   header: {
-    // flex: .3,
     fontSize: 50,
     backgroundColor: 'rgba(0,0,0,0)',
     color: '#3d5c5c',
@@ -99,10 +96,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
   searchSection: {
-    // flex: 1,
-    // height: 30,
     flexDirection: 'row',
-    // justifyContent: 'space-between',
+
     alignItems: 'flex-end',
     borderBottomColor: '#000',
     borderBottomWidth: 1,
@@ -119,7 +114,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapState = (state) => ({
+const mapState = ({state}) => ({
   searching: state.searching
 })
 
@@ -136,9 +131,9 @@ const mapDispatch = (dispatch) => ({
   getFrugalSearchTerms: (searchTerms) => {
     dispatch(ActionCreators.RecipeActions.getFrugalSearchTerms(searchTerms))
   },
-  getSuperRecipe: (query) => {
-    dispatch(ActionCreators.RecipeActions.getSuperRecipeFromApi(query))
-  },
+  // getSuperRecipe: (query) => {
+  //   dispatch(ActionCreators.RecipeActions.getSuperRecipeFromApi(query))
+  // },
 });
 
 export default connect(null, mapDispatch)(Home)
