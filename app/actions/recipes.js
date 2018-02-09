@@ -1,3 +1,5 @@
+import {appId, appKey} from '../config/keys';
+
 export const SET_SEARCHING = 'SET_SEARCHING'
 export const SET_SELECTED_RECIPES = 'SET_SELECTED_RECIPES'
 export const SET_SEARCH_TERMS = 'SET_SEARCH_TERMS'
@@ -49,8 +51,8 @@ export const getRecipesFromApi = (ingredients, bool) => {
     fetch(`https://api.yummly.com/v1/api/recipes?q=${params}`, {  // yummly search api call
       method: 'GET',
       headers: {
-        'X-Yummly-App-ID': '***REMOVED***',
-        'X-Yummly-App-Key': '***REMOVED***'
+        'X-Yummly-App-ID': appId,
+        'X-Yummly-App-Key': appKey
       }
     })
       .then(response => response.json())
@@ -61,8 +63,8 @@ export const getRecipesFromApi = (ingredients, bool) => {
           return fetch(`https://api.yummly.com/v1/api/recipe/${recipe.id}`, {
             method: 'GET',
             headers: {
-              'X-Yummly-App-ID': '***REMOVED***',
-              'X-Yummly-App-Key': '***REMOVED***'
+              'X-Yummly-App-ID': appId,
+              'X-Yummly-App-Key': appKey
             }
           })
             .then(response => response.json())
